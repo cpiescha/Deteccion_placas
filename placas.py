@@ -19,7 +19,7 @@ for i in cnts:
 
     if len(approx)==4 and area > 6000:
         print(f'area={area}')
-        cv2.drawContours(image,[i],0,(0,255,0),2)
+        cv2.drawContours(image,[i],0,(119, 255, 51),2)
         
         aspect_ratio = float(w)/h
         print(aspect_ratio)
@@ -30,11 +30,13 @@ for i in cnts:
             print('PLACA: ',text)
             cv2.imshow('PLACA',placa)
             cv2.moveWindow('PLACA',10,50)
-            cv2.rectangle(image,(x,y),(x+w,y+h),(0,255,0),3)
-            cv2.putText(image,text,(x-40,y-20),1,2.2,(0,255,0),2)
+            cv2.rectangle(image,(x,y),(x+w,y+h),(119, 255, 51),3)
+            cv2.putText(image,text,(x-40,y-20),1,2.2,(0,255,0),2,cv2.LINE_AA)
 
 cv2.imshow('Image2',image)
+#cv2.moveWindow('Image',45,10)
 cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 # gray = cv2.blur(gray,(3,3))
 # canny = cv2.Canny(gray,150,200)
