@@ -18,7 +18,7 @@ while (cap.isOpened()):
         
         al,an,_=frame.shape
 
-        print(f'alto: {al} \n ancho: {an}')
+        #print(f'alto: {al} \n ancho: {an}')
         
     
         x1=int(an/3) #se toma 1/3 de la imagen
@@ -29,8 +29,8 @@ while (cap.isOpened()):
 
         imgresize=cv2.resize(frame,(1200,900))
         gray = cv2.cvtColor(imgresize, cv2.COLOR_BGR2GRAY)
-        gray = cv2.blur(gray,(5,5))
-        canny = cv2.Canny(gray,250,20)
+        gray = cv2.GaussianBlur(gray,(5,5),0)
+        canny = cv2.Canny(gray,100,200)
         cnts,_=cv2.findContours(canny,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
         
         
@@ -40,12 +40,14 @@ while (cap.isOpened()):
             x,y,w,h = cv2.boundingRect(i)
             epsilon = 0.01*cv2.arcLength(i,True)
             approx = cv2.approxPolyDP(i,epsilon,True)
-            if (len(approx)==4) and (area > 7 and area < 50):
+    
+            if (len(approx)==4) and (area > 4 and area < 10):
+                print(f'aprox : {len(approx)}')
                 print(f'area={area}')
                 cv2.drawContours(imgresize,[i],0,(119, 255, 51),2)
                 aspect_ratio = float(w)/h
-                print(aspect_ratio)
-                if aspect_ratio>1.3:
+                print(f'aspect ratio: {aspect_ratio}')
+                if aspect_ratio>1 and aspect_ratio<11:
                     
                     placa = gray[y:y+h,x:x+w]
             
