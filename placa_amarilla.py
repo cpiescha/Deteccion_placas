@@ -22,8 +22,8 @@ while (cap.isOpened()):
         
         # #rectangulo donde mostrara la placa
         
-         # cv2.rectangle(frame,(870,750),(1070,850),(0,0,0),cv2.FILLED)
-        cv2.putText(imgresize,ctexto,(500,600),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
+        cv2.rectangle(imgresize,(300,600),(500,800),(0,0,0),cv2.FILLED)
+        cv2.putText(imgresize,ctexto[0:7],(300,650),cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
         
         al,an,_=imgresize.shape
         
