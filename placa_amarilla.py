@@ -70,7 +70,7 @@ while (cap.isOpened()):
             
             area=cv2.contourArea(contorno)
             
-            if area > 500 and area < 5000:
+            if area > 500 and area < 7000:
                 
                 #detectamos la placa
                 x,y,ancho,alto=cv2.boundingRect(contorno)
@@ -95,7 +95,7 @@ while (cap.isOpened()):
                 #extraemos el alto y ancho de fotogramas
                 alp,anp,cp=placa.shape
                 
-                print(f'alto: {alp} y ancho: {anp}')
+                
                 
                 #procesamos los pixeles para extraer los valores de las placas
                 
@@ -126,21 +126,23 @@ while (cap.isOpened()):
                 
                 # nos aseguramos de tener un buen tamaño de placa
             
-                #if alp >= 50 and anp >= 200:
+                if alp >= 10 and anp >= 40:
+
+                    config_placa = '--psm 7 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
                     
-                texto = pytesseract.image_to_string(placa,config='--psm 11')
+                    texto = pytesseract.image_to_string(placa,config= config_placa)
                     
                 
                     
                     #condicion para no mostrar basura
                     
-                if len(texto) >= 7:
+                    if len(texto) >= 7:
                     
                     #texto = pytesseract.image_to_string(placa,config='--psm 11')
                         
-                    print(texto)
+                        print(texto)
                         
-                    ctexto=texto
+                        ctexto=texto
                 
                 break
                 
