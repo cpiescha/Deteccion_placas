@@ -7,7 +7,7 @@ import time
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
-cap=cv2.VideoCapture('video_moto.mp4')
+cap=cv2.VideoCapture('video_moto2.mp4')
 
 ctexto=''
 
@@ -70,7 +70,7 @@ while (cap.isOpened()):
             
             area=cv2.contourArea(contorno)
             
-            if area > 2000 and area < 9000:
+            if area > 500 and area < 5000:
                 
                 #detectamos la placa
                 x,y,ancho,alto=cv2.boundingRect(contorno)
@@ -136,7 +136,7 @@ while (cap.isOpened()):
                     
                 if len(texto) >= 7:
                     
-                    texto = pytesseract.image_to_string(placa,config='--psm 11')
+                    #texto = pytesseract.image_to_string(placa,config='--psm 11')
                         
                     print(texto)
                         
