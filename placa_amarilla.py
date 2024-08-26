@@ -70,7 +70,7 @@ while (cap.isOpened()):
             
             area=cv2.contourArea(contorno)
             
-            if area > 500 and area < 2000:
+            if area > 500 and area < 5000:
                 
                 #detectamos la placa
                 x,y,ancho,alto=cv2.boundingRect(contorno)
@@ -90,12 +90,14 @@ while (cap.isOpened()):
                 #extraemos los pixeles
                 
                 placa= imgresize[ypi:ypf,xpi:xpf]
+
+                
                 
                 
                 #extraemos el alto y ancho de fotogramas
                 alp,anp,cp=placa.shape
                 
-                
+                print(f'alto: {alp} ancho: {anp}')
                 
                 #procesamos los pixeles para extraer los valores de las placas
                 
@@ -116,6 +118,8 @@ while (cap.isOpened()):
                         
                 #binarizamos la imagen
                 _, bin = cv2.threshold(Mva,150,255,cv2.THRESH_BINARY)
+
+                
                 
                 #convertimos la matriz en imagen
                 bin = bin.reshape(alp,anp)
@@ -123,32 +127,42 @@ while (cap.isOpened()):
                 bin = Image.fromarray(bin)
                 
                 bin = bin.convert("L")
+
+                
                 
                 # nos aseguramos de tener un buen tamaño de placa
             
-                #if alp >= 38 and anp >= 50:
+                #if alp >= 30 and anp >= 40:
+
+               
+
+
 
                 config_placa = '--psm 7 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
                     
-                texto = pytesseract.image_to_string(placa,config= config_placa)
+                texto = pytesseract.image_to_string(bin,config= config_placa)
                     
                 
                     
                     #condicion para no mostrar basura
                     
                 if len(texto) >= 7:
+
+                    
                     
                     #texto = pytesseract.image_to_string(placa,config='--psm 11')
                         
                     print(texto)
                         
                     ctexto=texto
+
+                        
                 
                 break
                 
     
         
-        cv2.imshow('video',imgresize)
+        cv2.imshow('video2',imgresize)
         
         
         if (cv2.waitKey(1)==ord('s')):
