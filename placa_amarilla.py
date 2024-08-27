@@ -92,7 +92,13 @@ while (cap.isOpened()):
                 
                 placa= imgresize[ypi:ypf,xpi:xpf]
 
-                
+                grey= cv2.cvtColor(placa, cv2.COLOR_BGR2GRAY)
+
+                _, binario = cv2.threshold(grey,120,255,cv2.THRESH_BINARY)
+
+                filtered_image = cv2.bilateralFilter(binario, 9, 75, 75)
+
+                cv2.imshow("bin",binario)
                 
                 
                 #extraemos el alto y ancho de fotogramas
@@ -149,7 +155,7 @@ while (cap.isOpened()):
                     config_placa = '--psm 7 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
                    
                     
-                    texto = pytesseract.image_to_string(placa,config= config_placa)
+                    texto = pytesseract.image_to_string(binario,config= config_placa)
                     
                 
                     
