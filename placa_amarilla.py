@@ -7,7 +7,7 @@ import time
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
-cap=cv2.VideoCapture('plates.mp4')
+cap=cv2.VideoCapture('video6.MOV')
 
 ctexto=''
 
@@ -124,37 +124,43 @@ while (cap.isOpened()):
                 #convertimos la matriz en imagen
                 bin = bin.reshape(alp,anp)
                 
+                #print(bin)
+                
                 bin = Image.fromarray(bin)
                 
+                
                 bin = bin.convert("L")
+                
+              
 
                 
                 
                 # nos aseguramos de tener un buen tamaño de placa
             
-                #if alp >= 30 and anp >= 40:
+                if alp >= 20 and anp >= 50:
 
                
 
+                    #cv2.imshow("bin",bin)
 
-
-                config_placa = '--psm 7 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+                    config_placa = '--psm 7 --oem 3 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+                   
                     
-                texto = pytesseract.image_to_string(bin,config= config_placa)
+                    texto = pytesseract.image_to_string(placa,config= config_placa)
                     
                 
                     
                     #condicion para no mostrar basura
                     
-                if len(texto) >= 7:
+                    if len(texto) >= 7:
 
                     
                     
                     #texto = pytesseract.image_to_string(placa,config='--psm 11')
                         
-                    print(texto)
+                        print(texto)
                         
-                    ctexto=texto
+                        ctexto=texto
 
                         
                 
