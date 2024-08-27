@@ -3,11 +3,12 @@ import pytesseract
 import cv2
 from PIL import Image
 import time
+import matplotlib.pyplot as plt
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
-cap=cv2.VideoCapture('video6.MOV')
+cap=cv2.VideoCapture('videos/video6.MOV')
 
 ctexto=''
 
@@ -123,6 +124,9 @@ while (cap.isOpened()):
                 
                 #convertimos la matriz en imagen
                 bin = bin.reshape(alp,anp)
+
+                
+
                 
                 #print(bin)
                 
@@ -131,8 +135,7 @@ while (cap.isOpened()):
                 
                 bin = bin.convert("L")
                 
-              
-
+                
                 
                 
                 # nos aseguramos de tener un buen tamaño de placa
